@@ -1,0 +1,26 @@
+{
+  "name": "graphql_client",
+  "version": "1.0.0",
+  "description": "Client for communicating with graphql",
+  "author": {
+    "name": "Sam Gay",
+    "email": "sam.gay@simpleviewinc.com"
+  },
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samgay3/rd-training-client"
+  },
+  "exports": {
+    "./src/*": {
+      "default": "./index.js"
+    }
+  },
+  "dependencies": {
+    "@simpleview/sv-graphql-client": "4.0.0"
+  }
+}
