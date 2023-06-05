@@ -1,7 +1,8 @@
-const { query } = require("@simpleview/sv-graphql-client");
+import pkg from "@simpleview/sv-graphql-client";
+const { query } = pkg;
+const client_query = query;
 
-
-class People{
+export class People{
   constructor({ graphUrl, graphServer }) {
     this._graphUrl = graphUrl;
     this._graphServer = graphServer;
@@ -9,12 +10,10 @@ class People{
 
 
   // Find
-  async find({ fields, context, filter, headers }) {
-    console.log("find_movie");
+  async find({ fields='', context, filter, headers }) {
+    console.log("find_people");
     console.log("fields:", fields);
-    console.log("context:", context);
     console.log("filter:", filter);
-    console.log("headers:", headers);
 
     const query = `
       query FindPeopleQuery($filter: training_people_find_filter_input) {
@@ -25,9 +24,9 @@ class People{
         }
       }
     `;
+    console.log("query:", query);
 
-    // TODO: Is the url automatically included without designating it? (sv-graphql-client)
-    return await query({
+    return await client_query({
       query,
       variables:{filter},
       headers,
@@ -37,12 +36,10 @@ class People{
   };
 
 
-
   // Insert
-  async insert({ fields, context, input, headers }) {
-    console.log("insert_movie");
+  async insert({ fields='', context, input, headers }) {
+    console.log("insert_people");
     console.log("fields:", fields);
-    console.log("context:", context);
     console.log("input:", input);
 
     const query = `
@@ -55,21 +52,20 @@ class People{
       }
     `;
 
-    return await query({
+    return await client_query({
       query,
       variables:{input},
       headers,
       url: this._graphUrl,
-      clean: true // automatically run nullToUndefined
+      clean: true
     });
   };
 
 
   // Remove
-  async remove({ fields, context, filter, headers }) {
-    console.log("remove_movie");
+  async remove({ fields='', context, filter, headers }) {
+    console.log("remove_people");
     console.log("fields:", fields);
-    console.log("context:", context);
     console.log("filter:", filter);
 
     const query = `
@@ -82,17 +78,12 @@ class People{
       }
     `;
 
-    return await query({
+    return await client_query({
       query,
       variables:{filter},
       headers,
       url: this._graphUrl,
-      clean: true // automatically run nullToUndefined
+      clean: true
     });
   };
-};
-
-
-module.exports = {
-  People
 };

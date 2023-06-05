@@ -1,7 +1,8 @@
-const { query } = require("@simpleview/sv-graphql-client");
+import pkg from "@simpleview/sv-graphql-client";
+const { query } = pkg;
+const client_query = query;
 
-
-class Movies{
+export class Movies{
   constructor({ graphUrl, graphServer }) {
     this._graphUrl = graphUrl;
     this._graphServer = graphServer;
@@ -9,10 +10,9 @@ class Movies{
 
 
   // Find
-  async find({ fields, context, filter, headers }) {
+  async find({ fields='', context, filter, headers }) {
     console.log("find_movie");
     console.log("fields:", fields);
-    console.log("context:", context);
     console.log("filter:", filter);
 
     const query = `
@@ -24,9 +24,9 @@ class Movies{
         }
       }
     `;
+    console.log("query:", query);
 
-    // TODO: Is the url automatically included without designating it? (sv-graphql-client)
-    return await query({
+    return await client_query({
       query,
       variables:{filter},
       headers,
@@ -36,62 +36,54 @@ class Movies{
   };
 
 
-
   // Insert
-  async insert({ fields, context, input, headers }) {
+  async insert({ fields='', context, input, headers }) {
     console.log("insert_movie");
     console.log("fields:", fields);
-    console.log("context:", context);
     console.log("input:", input);
 
     const query = `
-          mutation InsertMovieVarMutation($input: [training_movies_insert_input]) {
-            training {
-              insert_movie(input: $input) {
-                ${fields}
-              }
-            }
+      mutation InsertMovieVarMutation($input: [training_movies_insert_input]) {
+        training {
+          insert_movie(input: $input) {
+            ${fields}
           }
-        `;
+        }
+      }
+    `;
 
-    return await query({
+    return await client_query({
       query,
       variables:{input},
       headers,
       url: this._graphUrl,
-      clean: true // automatically run nullToUndefined
+      clean: true
     });
   };
 
 
   // Remove
-  async remove({ fields, context, filter, headers }) {
+  async remove({ fields='', context, filter, headers }) {
     console.log("remove_movie");
     console.log("fields:", fields);
-    console.log("context:", context);
     console.log("filter:", filter);
 
     const query = `
-          mutation RemoveMovieMutation($filter: training_movies_remove_filter_input) {
-            training {
-              remove_movie(filter: $filter) {
-                ${fields}
-              }
-            }
+      mutation RemoveMovieMutation($filter: training_movies_remove_filter_input) {
+        training {
+          remove_movie(filter: $filter) {
+            ${fields}
           }
-        `;
+        }
+      }
+    `;
 
-    return await query({
+    return await client_query({
       query,
       variables:{filter},
       headers,
       url: this._graphUrl,
-      clean: true // automatically run nullToUndefined
+      clean: true
     });
   };
-};
-
-
-module.exports = {
-  Movies
 };
