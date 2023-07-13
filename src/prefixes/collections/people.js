@@ -11,10 +11,6 @@ export class People{
 
   // Find
   async find({ fields='', context, filter, headers }) {
-    console.log("find_people");
-    console.log("fields:", fields);
-    console.log("filter:", filter);
-
     const query = `
       query FindPeopleQuery($filter: training_people_find_filter_input) {
         training {
@@ -24,7 +20,6 @@ export class People{
         }
       }
     `;
-    console.log("query:", query);
 
     return await client_query({
       query,
@@ -38,10 +33,6 @@ export class People{
 
   // Insert
   async insert({ fields='', context, input, headers }) {
-    console.log("insert_people");
-    console.log("fields:", fields);
-    console.log("input:", input);
-
     const query = `
       mutation InsertPersonMutationVar($input: [training_people_insert_input]) {
         training {
@@ -64,10 +55,6 @@ export class People{
 
   // Remove
   async remove({ fields='', context, filter, headers }) {
-    console.log("remove_people");
-    console.log("fields:", fields);
-    console.log("filter:", filter);
-
     const query = `
       mutation RemovePersonMutation($filter: training_people_remove_filter_input) {
         training {

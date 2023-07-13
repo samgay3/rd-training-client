@@ -11,10 +11,6 @@ export class Movies{
 
   // Find
   async find({ fields='', context, filter, headers }) {
-    console.log("find_movie");
-    console.log("fields:", fields);
-    console.log("filter:", filter);
-
     const query = `
       query FindMoviesQuery($filter: training_movies_find_filter_input) {
         training {
@@ -24,7 +20,6 @@ export class Movies{
         }
       }
     `;
-    console.log("query:", query);
 
     return await client_query({
       query,
@@ -38,10 +33,6 @@ export class Movies{
 
   // Insert
   async insert({ fields='', context, input, headers }) {
-    console.log("insert_movie");
-    console.log("fields:", fields);
-    console.log("input:", input);
-
     const query = `
       mutation InsertMovieVarMutation($input: [training_movies_insert_input]) {
         training {
@@ -64,10 +55,6 @@ export class Movies{
 
   // Remove
   async remove({ fields='', context, filter, headers }) {
-    console.log("remove_movie");
-    console.log("fields:", fields);
-    console.log("filter:", filter);
-
     const query = `
       mutation RemoveMovieMutation($filter: training_movies_remove_filter_input) {
         training {
