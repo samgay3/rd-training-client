@@ -1,2 +1,2 @@
-import TrainingPrefix from './prefixes/TrainingPrefix.js';
-export default TrainingPrefix;
+const TrainingPrefix = require('./prefixes/TrainingPrefix.js');
+module.exports = TrainingPrefix;

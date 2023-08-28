@@ -7,7 +7,6 @@
     "email": "sam.gay@simpleviewinc.com"
   },
   "license": "ISC",
-  "type": "module",
   "main": "./src/index.js",
   "exports": {
     ".": "./src/index.js",

@@ -1,14 +1,14 @@
-import { Movies } from "./collections/movies.js";
-import { People } from "./collections/people.js";
+const { Movies } = require("./collections/movies.js");
+const { People } = require("./collections/people.js");
 
-export default class TrainingPrefix {
-  constructor({ graphUrl, graphServer }) {
-    this.name = 'training';
-    this._graphUrl = graphUrl;
-    this._graphServer = graphServer;
+module.exports = class TrainingPrefix {
+	constructor({ graphUrl, graphServer }) {
+		this.name = 'training';
+		this._graphUrl = graphUrl;
+		this._graphServer = graphServer;
 
-    // expose collections
-    this.movies = new Movies({ graphUrl, graphServer });
-    this.people = new People({ graphUrl, graphServer });
-  }
+		// expose collections
+		this.movies = new Movies({ graphUrl, graphServer });
+		this.people = new People({ graphUrl, graphServer });
+	}
 };
